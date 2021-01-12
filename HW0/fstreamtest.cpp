@@ -31,7 +31,6 @@ int main () {
 			arr[j] = arr[j] * 10 + (myarray[i] - 48); 
 		} 
 	} 
-
 	cout << "\narr[] = "; 
 	for (int i = 0; i <= j; i++) { 
 		cout << arr[i] << " "; 
