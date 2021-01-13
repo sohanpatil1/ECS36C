@@ -1,47 +1,41 @@
-//Original Code with changed struct
-#include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
+#include "insertion_sort.cpp"
 
-struct IntSequence{
-    int length;
-    int *array;
-};
-
-void insertion_sort(IntSequence A)
+int main(int argc, char const *argv[])
 {
-    int i=0,key=0;
-    for(int j=1;j<A.length;j++)
-    {
-        i=j-1;
-        key = A.array[j];
-        while(A.array[i]>key && i>=0)
-        {
-            A.array[i+1]=A.array[i];
-            i=i-1;
-        }
-        A.array[i+1] = key;
-    }
-    std::cout<<"\nSorted Array";
-    for(int i=0;i<A.length;i++)
-    {
-        std::cout<<A.array[i]<<" ";
-    }
-}
 
+    /**
+     * YOUR CODE HERE
+     * 1. Check for the number of arguments.
+     * Only proceed if the number of argument is correct,
+     * We will only check for ./main [INPUT_FILE] [OUTPUT_FILE]
+     * 
+     */
+     if(argc!=2)
+     {
+         std::cout<<"Missing Argument, Required 2"<<std::endl;
+         return(-1);
+     }
 
-int main()
-{
+    /**
+     * YOUR CODE HERE
+     * 2. Read the file [INPUT_FILE]
+     * 
+     */
     string myarray,lengths;
     IntSequence A;
     
-    ifstream MyReadFile("filename.txt");
+    ifstream MyReadFile(argv[1]);
     getline (MyReadFile, lengths);
     A.length = std::stoi(lengths);
     getline (MyReadFile, myarray);
     cout << myarray;
   
+
+    /**
+     * YOUR CODE HERE
+     * 3. Build IntSequence
+     */
+    
     A.array = new int[A.length];
 
 	int j = 0; 
@@ -59,16 +53,25 @@ int main()
 		cout << A.array[i] << " "; 
 	} 
     MyReadFile.close();
-  
-    
+
+    /**
+     * YOUR CODE HERE
+     * 4. Run Insertion Sort
+     */
     insertion_sort(A);
-    
-    
-    ofstream MyFile("Output.txt");
+
+
+    /**
+     * YOUR CODE HERE
+     * 5. Write the file into [OUTPUT_FILE]
+     */
+      
+    ofstream MyFile(argv[2]);
     for(int i=0;i<A.length;i++)
     {
         MyFile << A.array[i] << " ";
     }
     MyFile.close();
+
     return 0;
 }
